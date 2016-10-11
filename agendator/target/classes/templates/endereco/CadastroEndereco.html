@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'">
+<head>
+<title>Cadastro Endereço</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/layout/stylesheets/vendors/bootstrap-switch.min.css}" />
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>Cadastro de Endereço</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<form method="POST" th:object="${endereco}"
+			class="form-vertical  js-form-loading">
+
+			<div class="form-group">
+				<label for="empresa">Empresa</label>
+				<div class="bw-field-action">
+					<select id="empresa" class="form-control">
+						<option value="">Selecione a empresa</option>
+						<option th:each="empresa : ${empresas}" th:value="${empresa.id}"
+							th:text="${empresa.nome}">Empresa</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-9">
+					<label for="input-produto-nome">Logradouro</label> <input
+						id="logradouro" type="text" class="form-control"
+						th:field="*{logradouro}" />
+				</div>
+
+				<div class="form-group col-sm-3">
+					<label for="input-produto-nome">Número</label> <input id="numero"
+						type="text" class="form-control" th:field="*{numero}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="input-produto-nome">Complemento</label> <input
+					id="complemento" type="text" class="form-control"
+					th:field="*{complemento}" />
+			</div>
+
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label for="input-produto-nome">CEP</label> <input id="cep"
+						type="text" class="form-control" th:field="*{cep}" />
+				</div>
+
+				<div class="form-group col-sm-3">
+					<label for="input-produto-nome">Bairro</label> <input id="bairro"
+						type="text" class="form-control" th:field="*{bairro}" />
+				</div>
+
+				<div class="form-group col-sm-3">
+					<label for="input-produto-nome">Cidade</label> <input id="cidade"
+						type="text" class="form-control" th:field="*{cidade}" />
+				</div>
+
+				<div class="form-group col-sm-3">
+					<label for="SelectEmpresa">Estado</label> <select
+						id="SelectEmpresa" class="form-control">
+						<option>AC</option>
+						<option>AL</option>
+						<option>AP</option>
+						<option>AM</option>
+						<option>BA</option>
+						<option>CE</option>
+						<option>DF</option>
+						<option>ES</option>
+						<option>GO</option>
+						<option>MA</option>
+						<option>MT</option>
+						<option>MS</option>
+						<option>MG</option>
+						<option>PA</option>
+						<option>PB</option>
+						<option>PR</option>
+						<option>PE</option>
+						<option>PI</option>
+						<option>RJ</option>
+						<option>RN</option>
+						<option>RS</option>
+						<option>RO</option>
+						<option>RR</option>
+						<option>SC</option>
+						<option>SP</option>
+						<option>SE</option>
+						<option>TO</option>
+					</select>
+				</div>
+
+			</div>
+
+
+
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+				<a href="pesquisa-produtos.html" class="btn  btn-default">Cancelar</a>
+				<a href="#" class="btn  btn-link  aw-btn-link-danger"
+					onclick="excluir()">Excluir este Endereço</a>
+			</div>
+		</form>
+	</div>
+
+	<script>
+		function excluir() {
+			swal({
+				title : "Tem certeza?",
+				text : "Você não poderá recuperar o serviço após a exclusão.",
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonColor : "#DD6B55",
+				confirmButtonText : "Sim, exclua agora!",
+				closeOnConfirm : false,
+				showLoaderOnConfirm : true
+			}, function() {
+				setTimeout(function() {
+					swal("Excluído!", "O serviço foi excluído com sucesso.",
+							"success");
+				}, 2000);
+			});
+		}
+	</script>
+
+</section>
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/layout/javascripts/vendors/bootstrap-switch.min.js}"></script>
+	<script>
+		$('.js-status').bootstrapSwitch();
+	</script>
+</th:block>
+</html>
